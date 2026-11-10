@@ -1,10 +1,21 @@
 # p2p-filedrop
 
-Send files and chat directly between browsers, using a link. There is no server of ours: files go peer to peer over WebRTC, end-to-end encrypted by the browser.
+Send files and chat directly between browsers, using a link.
+
+Try it: https://franciscocarloserra.github.io/p2p-filedrop/
 
 ![p2p-filedrop](screenshot.png)
 
 Open the page to create a room, copy the link, send it. Whoever opens it asks to enter and the creator accepts or rejects them. Shared files expire after 1 h unless you pick another time, and also vanish when you close the tab.
+
+## How it connects
+
+There is no backend of ours, but connecting relies on third parties:
+
+1. GitHub Pages serves the static page.
+2. Browsers find each other through [Trystero](https://github.com/dmotz/trystero) over public Nostr relays (`nos.lol`, `relay.primal.net`, `nostr.mom`). The relays only carry the WebRTC connection setup, encrypted with the link's secret.
+3. STUN servers from Google and Cloudflare tell each browser its public address.
+4. Files and chat then go directly between browsers over WebRTC, encrypted end to end by the browser.
 
 ## Run
 
